@@ -266,10 +266,12 @@ body {
 
 .glass {
   position: absolute;
-  left: -40px;
-  bottom: -110px;
-  width: clamp(220px, 32vw, 420px);
-  opacity: 0.96;
+  left: 8%;
+  bottom: -18%;
+  width: clamp(180px, 21vw, 300px);
+  transform: rotate(-24deg);
+  transform-origin: center center;
+  opacity: 0.98;
 }
 
 .bottle-wrap {
