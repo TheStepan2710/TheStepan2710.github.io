@@ -14,19 +14,19 @@ const stepConfig = [
   },
   {
     brand: 'NETARKOS',
-    cta: 'BUY NOW',
+    cta: 'BUY BEER',
     bottle: { angle: -28, top: 50, left: 50 },
     shadow: { sx: 1.15, sy: 0.5, blur: 88, op: 0.42 },
   },
   {
-    brand: 'LAGUNITAS',
+    brand: 'NETARKOS',
     cta: 'BUY BEER',
     bottle: { angle: -108, top: 50, left: 50 },
     shadow: { sx: 1.42, sy: 0.42, blur: 96, op: 0.45 },
   },
   {
-    brand: 'LAGUNITAS',
-    cta: 'BUY NOW',
+    brand: 'NETARKOS',
+    cta: 'BUY BEER',
     bottle: { angle: 90, top: 50, left: 50 },
     shadow: { sx: 1.36, sy: 0.44, blur: 94, op: 0.44 },
   },
