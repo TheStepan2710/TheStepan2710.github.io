@@ -9,25 +9,25 @@ const stepConfig = [
   {
     brand: 'NETARKOS',
     cta: 'BUY BEER',
-    bottle: { angle: 18, top: 50, left: 50 },
+    bottle: { angle: 23, top: 50, left: 50 },
     shadow: { sx: 1.0, sy: 0.56, blur: 82, op: 0.38 },
   },
   {
     brand: 'NETARKOS',
     cta: 'BUY BEER',
-    bottle: { angle: -8, top: 50, left: 50 },
+    bottle: { angle: -23, top: 50, left: 50 },
     shadow: { sx: 1.15, sy: 0.5, blur: 88, op: 0.42 },
   },
   {
     brand: 'NETARKOS',
     cta: 'BUY BEER',
-    bottle: { angle: -90, top: 50, left: 50 },
+    bottle: { angle: -108, top: 50, left: 50 },
     shadow: { sx: 1.42, sy: 0.42, blur: 96, op: 0.45 },
   },
   {
     brand: 'NETARKOS',
     cta: 'BUY BEER',
-    bottle: { angle: 0, top: 50, left: 50 },
+    bottle: { angle: 90, top: 50, left: 50 },
     shadow: { sx: 1.36, sy: 0.44, blur: 94, op: 0.44 },
   },
 ];
