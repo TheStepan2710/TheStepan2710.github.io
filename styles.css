@@ -1,87 +1,327 @@
-* {
-	box-sizing: border-box;
-  }
-  
-  body {
-	margin: 0;
-	width: 100vw;
-	height: 100vh;
-	overflow: hidden;
-	background: #f4f1ea;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-  }
-  
-  .scene {
-	position: relative;
-	width: 100%;
-	height: 100%;
-  }
-  
-  .bottle-wrap {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 240px;          /* совпадает с бутылкой */
-  transform: translate(-50%, -50%);
-  cursor: pointer;
-
-  /* статичное смещение тени как в Figma */
-  --shadow-x: 96px;
-  --shadow-y: 36px;
-
-  /* “форма” тени (будем менять из JS) */
-  --sx: 1;
-  --sy: 0.55;
-  --blur: 90px;
-  --op: 0.45;
-
-  /* контактная тень */
-  --cblur: 22px;
-  --cop: 0.22;
+:root {
+  --bg: #f3efe6;
+  --red: #c3122b;
+  --black: #111111;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.bottle {
-  display: block;
-  width: 240px;
-  transform: rotate(0deg);
-  transform-origin: center center;
+* {
+  box-sizing: border-box;
+}
 
-  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--black);
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+body {
+  position: relative;
+}
+
+.left-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 84px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  z-index: 6;
+}
+
+.rail-line {
+  width: 1px;
+  flex: 1;
+  background: rgba(17, 17, 17, 0.4);
+}
+
+.rail-icon {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+
+.rail-icon span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--black);
+}
+
+.search-icon {
+  position: relative;
+}
+
+.search-icon span {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  background: transparent;
+  position: relative;
+}
+
+.search-icon span::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 2px;
+  background: var(--black);
+  right: -6px;
+  bottom: -1px;
+  transform: rotate(40deg);
+  transform-origin: right center;
+}
+
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding-left: 96px;
+}
+
+.top-bar {
+  position: absolute;
+  top: 28px;
+  left: 120px;
+  right: 54px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 7;
+}
+
+.brand {
+  margin: 0;
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(2.1rem, 4vw, 3.8rem);
+  line-height: 0.95;
+  letter-spacing: 0.05em;
+}
+
+.cta,
+.scene-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--red);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: 6px;
+  min-height: 46px;
+  padding: 0 24px;
+  border: 2px solid transparent;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.cta {
+  font-size: 0.9rem;
+}
+
+.scene-button {
+  position: relative;
+  margin-top: 14px;
+  width: fit-content;
+}
+
+.cta:hover,
+.scene-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(195, 18, 43, 0.3);
+}
+
+.cta:focus-visible,
+.scene-button:focus-visible,
+.bottle-wrap:focus-visible {
+  outline: 3px solid #111;
+  outline-offset: 4px;
+}
+
+.scenes {
+  height: 400vh;
+  width: 100%;
+  transition: transform 760ms var(--ease);
   will-change: transform;
 }
 
-/* тень НЕ вращаем, чтобы свет ощущался статичным */
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding: 110px 88px 60px 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.scene-release {
+  align-items: center;
+  text-align: center;
+}
+
+.hero-text {
+  font-family: 'Anton', Impact, sans-serif;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: 0.015em;
+  pointer-events: none;
+}
+
+.hero-text span {
+  display: block;
+}
+
+.hero-text.red {
+  color: var(--red);
+}
+
+.hero-text.black {
+  color: var(--black);
+}
+
+.hero-text.giant {
+  font-size: clamp(5.4rem, 13vw, 12rem);
+  max-width: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.hero-text.stacked {
+  font-size: clamp(4.8rem, 12vw, 11rem);
+}
+
+.distressed {
+  position: relative;
+}
+
+.distressed::before {
+  content: attr(data-text);
+  white-space: pre;
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background-image:
+    radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.28) 0 1px, transparent 2px),
+    radial-gradient(circle at 66% 35%, rgba(255, 255, 255, 0.26) 0 1px, transparent 2px),
+    radial-gradient(circle at 42% 72%, rgba(255, 255, 255, 0.24) 0 1px, transparent 2px),
+    radial-gradient(circle at 81% 60%, rgba(255, 255, 255, 0.23) 0 1px, transparent 2px);
+  background-size: 30px 28px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.scene-india {
+  align-items: flex-start;
+}
+
+.info-card {
+  position: absolute;
+  right: 8%;
+  top: 52%;
+  transform: translateY(-50%);
+  width: min(300px, 35vw);
+  border: 1px solid rgba(17, 17, 17, 0.75);
+  padding: 20px 24px;
+}
+
+.info-label {
+  margin: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+}
+
+.info-value {
+  margin: 8px 0 14px;
+  font-family: 'Anton', Impact, sans-serif;
+  font-size: clamp(3rem, 5vw, 4.4rem);
+  line-height: 0.9;
+}
+
+.info-copy {
+  margin: 0 0 6px;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.glass {
+  position: absolute;
+  left: -40px;
+  bottom: -110px;
+  width: clamp(220px, 32vw, 420px);
+  opacity: 0.96;
+}
+
+.bottle-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(320px, 34vw, 512px);
+  border: none;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 5;
+  transform: translate(-50%, -50%);
+  transition: top 760ms var(--ease), left 760ms var(--ease);
+
+  --sx: 1;
+  --sy: 0.56;
+  --blur: 82px;
+  --op: 0.38;
+}
+
+.bottle {
+  width: 100%;
+  display: block;
+  transform: rotate(-18deg);
+  transform-origin: center center;
+  transition: transform 760ms var(--ease);
+  will-change: transform;
+}
+
 .bottle-shadow {
   position: absolute;
   inset: 0;
-  pointer-events: none;
-
-  /* эллипс тени под бутылкой */
   background: rgba(0, 0, 0, var(--op));
   border-radius: 999px;
-
-  /* статично “улетает” в одну сторону + меняется форма */
-  transform:
-    translate(var(--shadow-x), var(--shadow-y))
-    scaleX(var(--sx))
-    scaleY(var(--sy));
-
+  transform: translate(80px, 42px) scaleX(var(--sx)) scaleY(var(--sy));
   filter: blur(var(--blur));
-  transition:
-    transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
-    filter 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-  will-change: transform, filter;
+  transition: transform 760ms var(--ease), filter 760ms var(--ease);
 }
 
-/* дополнительная контактная тень (даёт контраст) */
-.bottle-shadow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, var(--cop));
-  border-radius: inherit;
-  filter: blur(var(--cblur));
+@media (max-width: 1024px) {
+  .top-bar {
+    left: 104px;
+    right: 24px;
+  }
+
+  .scene {
+    padding: 108px 24px 40px 116px;
+  }
+
+  .info-card {
+    right: 24px;
+    width: min(250px, 42vw);
+  }
 }
-  
