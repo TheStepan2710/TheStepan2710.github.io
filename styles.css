@@ -1,0 +1,87 @@
+* {
+	box-sizing: border-box;
+  }
+  
+  body {
+	margin: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	background: #f4f1ea;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .scene {
+	position: relative;
+	width: 100%;
+	height: 100%;
+  }
+  
+  .bottle-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;          /* совпадает с бутылкой */
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+
+  /* статичное смещение тени как в Figma */
+  --shadow-x: 96px;
+  --shadow-y: 36px;
+
+  /* “форма” тени (будем менять из JS) */
+  --sx: 1;
+  --sy: 0.55;
+  --blur: 90px;
+  --op: 0.45;
+
+  /* контактная тень */
+  --cblur: 22px;
+  --cop: 0.22;
+}
+
+.bottle {
+  display: block;
+  width: 240px;
+  transform: rotate(0deg);
+  transform-origin: center center;
+
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+}
+
+/* тень НЕ вращаем, чтобы свет ощущался статичным */
+.bottle-shadow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  /* эллипс тени под бутылкой */
+  background: rgba(0, 0, 0, var(--op));
+  border-radius: 999px;
+
+  /* статично “улетает” в одну сторону + меняется форма */
+  transform:
+    translate(var(--shadow-x), var(--shadow-y))
+    scaleX(var(--sx))
+    scaleY(var(--sy));
+
+  filter: blur(var(--blur));
+  transition:
+    transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1),
+    filter 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform, filter;
+}
+
+/* дополнительная контактная тень (даёт контраст) */
+.bottle-shadow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--cop));
+  border-radius: inherit;
+  filter: blur(var(--cblur));
+}
+  
