@@ -1,20 +1,90 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
-	<meta charset="UTF-8" />
-	<title>Bottle rotation test</title>
-	<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lagunitas Landing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
+  <div class="left-rail" aria-hidden="true">
+    <span class="rail-line rail-line-top"></span>
+    <button class="rail-icon" type="button" tabindex="-1" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <button class="rail-icon search-icon" type="button" tabindex="-1" aria-label="Search">
+      <span></span>
+    </button>
+    <span class="rail-line rail-line-bottom"></span>
+  </div>
 
-	<div class="bottle-wrap" id="bottleWrap">
-		<div class="bottle-shadow" aria-hidden="true"></div>
-		<img src="assets/bottle.png" alt="Beer bottle" class="bottle" id="bottle" />
-	  </div>
+  <main class="stage" id="stage" aria-live="polite">
+    <header class="top-bar">
+      <p class="brand" id="brand">NETARKOS</p>
+      <a href="#" class="cta" id="ctaButton">BUY BEER</a>
+    </header>
 
-	<script src="script.js"></script>
+    <div class="scenes" id="scenes">
+      <section class="scene scene-release" aria-label="Unlimited Release IPA">
+        <div class="hero-text red giant distressed" data-text="UNLIMITED\nRELEASE IPA">
+          <span>UNLIMITED</span>
+          <span>RELEASE IPA</span>
+        </div>
+      </section>
+
+      <section class="scene scene-india" aria-label="India Pale Ale">
+        <div class="hero-text black stacked">
+          <span>INDIA</span>
+          <span>PALE ALE</span>
+        </div>
+        <a href="#" class="scene-button">BUY NOW</a>
+        <aside class="info-card">
+          <p class="info-label">ABV</p>
+          <p class="info-value">6.2%</p>
+          <p class="info-copy">Crafted with bright hops and citrus notes.</p>
+          <p class="info-copy">Smooth finish with balanced bitterness.</p>
+        </aside>
+      </section>
+
+      <section class="scene scene-release scene-release-glass" aria-label="Unlimited Release IPA with glass">
+        <div class="hero-text red giant distressed" data-text="UNLIMITED\nRELEASE IPA">
+          <span>UNLIMITED</span>
+          <span>RELEASE IPA</span>
+        </div>
+        <img src="./assets/glass.png" alt="Beer glass" class="glass" />
+      </section>
+
+      <section class="scene scene-india" aria-label="India Pale Ale horizontal bottle">
+        <div class="hero-text black stacked">
+          <span>INDIA</span>
+          <span>PALE ALE</span>
+        </div>
+        <a href="#" class="scene-button">BUY NOW</a>
+        <aside class="info-card">
+          <p class="info-label">ABV</p>
+          <p class="info-value">6.2%</p>
+          <p class="info-copy">Fresh floral aroma with piney layers.</p>
+          <p class="info-copy">Brewed for a dry, clean and crisp close.</p>
+        </aside>
+      </section>
+
+      <section class="scene scene-zoom" aria-label="Bottle label close up"></section>
+    </div>
+
+    <button class="bottle-wrap" id="bottleWrap" aria-label="Go to next beer scene">
+      <div class="bottle-shadow" aria-hidden="true"></div>
+      <img src="./assets/bottle.png" alt="Beer bottle" class="bottle" id="bottle" />
+    </button>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 
 </html>
