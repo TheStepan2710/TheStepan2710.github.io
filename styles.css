@@ -157,7 +157,6 @@ body {
 }
 
 .scenes {
-  height: 400vh;
   width: 100%;
   transition: transform 760ms var(--ease);
   will-change: transform;
@@ -171,6 +170,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
 }
 
 .scene-release {
@@ -266,12 +266,19 @@ body {
 
 .glass {
   position: absolute;
-  left: -5%;
-  bottom: -30%;
+  left: 8%;
+  bottom: -18%;
   width: clamp(180px, 21vw, 300px);
-  transform: rotate(25deg);
+  transform: rotate(-24deg) translateY(0);
   transform-origin: center center;
   opacity: 0.98;
+  transition: transform 760ms var(--ease), opacity 760ms var(--ease);
+}
+
+.stage[data-step='3'] .scene-release-glass .glass,
+.stage[data-step='4'] .scene-release-glass .glass {
+  transform: rotate(-24deg) translateY(-170vh);
+  opacity: 0;
 }
 
 .bottle-wrap {
@@ -285,7 +292,7 @@ body {
   cursor: pointer;
   z-index: 5;
   transform: translate(-50%, -50%);
-  transition: top 760ms var(--ease), left 760ms var(--ease);
+  transition: top 760ms var(--ease), left 760ms var(--ease), width 760ms var(--ease);
 
   --sx: 1;
   --sy: 0.56;
@@ -294,7 +301,7 @@ body {
 }
 
 .bottle {
-  width: 85%;
+  width: 100%;
   display: block;
   transform: rotate(-18deg);
   transform-origin: center center;
@@ -307,7 +314,7 @@ body {
   inset: 0;
   background: rgba(0, 0, 0, var(--op));
   border-radius: 999px;
-  transform: translate(80px, 42px) scaleX(var(--sx)) scaleY(var(--sy));
+  transform: translate(58px, 28px) scaleX(var(--sx)) scaleY(var(--sy));
   filter: blur(var(--blur));
   transition: transform 760ms var(--ease), filter 760ms var(--ease);
 }
@@ -325,5 +332,25 @@ body {
   .info-card {
     right: 24px;
     width: min(250px, 42vw);
+  }
+}
+
+
+.stage[data-step='0'] .bottle-wrap {
+  animation: bottlePulse 1.8s ease-in-out infinite;
+}
+
+.stage:not([data-step='0']) .bottle-wrap {
+  animation: none;
+}
+
+@keyframes bottlePulse {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  50% {
+    transform: translate(-50%, -50%) scale(1.04);
   }
 }

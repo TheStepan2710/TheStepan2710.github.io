@@ -9,26 +9,32 @@ const stepConfig = [
   {
     brand: 'NETARKOS',
     cta: 'BUY BEER',
-    bottle: { angle: 28, top: 50, left: 50 },
-    shadow: { sx: 1.0, sy: 0.56, blur: 82, op: 0.38 },
+    bottle: { angle: -18, top: 50, left: 50, width: 'clamp(320px, 34vw, 512px)' },
+    shadow: { sx: 0.92, sy: 0.5, blur: 56, op: 0.2 },
   },
   {
     brand: 'NETARKOS',
     cta: 'BUY BEER',
-    bottle: { angle: -28, top: 50, left: 50 },
-    shadow: { sx: 1.15, sy: 0.5, blur: 88, op: 0.42 },
+    bottle: { angle: -8, top: 50, left: 50, width: 'clamp(320px, 34vw, 512px)' },
+    shadow: { sx: 1.02, sy: 0.46, blur: 60, op: 0.22 },
   },
   {
     brand: 'NETARKOS',
     cta: 'BUY BEER',
-    bottle: { angle: -108, top: 50, left: 50 },
-    shadow: { sx: 1.42, sy: 0.42, blur: 96, op: 0.45 },
+    bottle: { angle: 90, top: 50, left: 50, width: 'clamp(320px, 34vw, 512px)' },
+    shadow: { sx: 1.2, sy: 0.38, blur: 66, op: 0.24 },
   },
   {
     brand: 'NETARKOS',
     cta: 'BUY BEER',
-    bottle: { angle: 90, top: 50, left: 50 },
-    shadow: { sx: 1.36, sy: 0.44, blur: 94, op: 0.44 },
+    bottle: { angle: 0, top: 50, left: 50, width: 'clamp(320px, 34vw, 512px)' },
+    shadow: { sx: 1.12, sy: 0.4, blur: 62, op: 0.22 },
+  },
+  {
+    brand: 'NETARKOS',
+    cta: 'BUY BEER',
+    bottle: { angle: 0, top: 50, left: 66, width: 'min(72vw, 1120px)' },
+    shadow: { sx: 0.9, sy: 0.36, blur: 52, op: 0.16 },
   },
 ];
 
@@ -48,6 +54,7 @@ function applyStep(index) {
   bottle.style.transform = `rotate(${cfg.bottle.angle}deg)`;
   bottleWrap.style.top = `${cfg.bottle.top}%`;
   bottleWrap.style.left = `${cfg.bottle.left}%`;
+  bottleWrap.style.width = cfg.bottle.width;
 
   bottleWrap.style.setProperty('--sx', cfg.shadow.sx);
   bottleWrap.style.setProperty('--sy', cfg.shadow.sy);
@@ -56,6 +63,7 @@ function applyStep(index) {
 
   brand.textContent = cfg.brand;
   ctaButton.textContent = cfg.cta;
+  stage.dataset.step = String(index);
 }
 
 function goToStep(nextStep) {
@@ -114,4 +122,5 @@ bottleWrap.addEventListener('click', () => {
   nextStep();
 });
 
+scenes.style.height = `${totalSteps * 100}vh`;
 applyStep(currentStep);
